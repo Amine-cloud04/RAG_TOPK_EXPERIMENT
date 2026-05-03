@@ -1,0 +1,13 @@
+Question,Latency,Sources,Answer Status,Answer Length,Answer
+What is retrieval augmented generation?,0.38,article_state-of-rag-genai.txt,Answered,218,"Retrieval Augmented Generation (RAG) offers a powerful approach for deploying accurate, reliable, and up-to-date information, enabling enterprises to build systems that are intelligent, compliant, secure, and scalable."
+What is a vector database?,0.26,wiki_vector_database.txt,Answered,93,A vector database is a database that stores and retrieves embeddings of data in vector space.
+What is prompt engineering?,0.38,wiki_prompt_engineering.txt,Insufficient information,188,"Insufficient information. The context does not provide a direct definition of prompt engineering, but rather describes its application, importance, and the job market for prompt engineers."
+How do transformers use attention?,0.23,wiki_attention_(machine_learning).txt,Insufficient information,25,Insufficient information.
+What is a large language model?,0.26,wiki_prompt_engineering.txt,Insufficient information,25,Insufficient information.
+What are the benefits of RAG?,0.29,article_retrieval-augmented-generation.txt,Answered,79,"The benefits of RAG are: 
+1. Access to fresh information 
+2. Factual grounding."
+What are open source RAG frameworks?,0.24,article_best-open-source-rag-frameworks.txt,Insufficient information,25,Insufficient information.
+What is deep learning?,0.3,wiki_deep_learning.txt,Answered,175,"Deep learning (DL) is a subset of machine learning that utilizes multilayered neural networks to perform tasks such as classification, regression, and representation learning."
+What is artificial intelligence?,0.26,wiki_artificial_intelligence.txt,Answered,213,"Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making."
+How does Top K retrieval work?,0.23,wiki_retrieval-augmented_generation.txt,Insufficient information,25,Insufficient information.

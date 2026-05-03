@@ -1,0 +1,737 @@
+Source: https://www.firecrawl.dev/blog/best-open-source-rag-frameworks
+
+15 Best Open-Source RAG Frameworks in 2026
+Introducing /parse. Convert PDFs, Word docs, or spreadsheets into clean data for AI agents 5x faster.
+Try it now →
+·
+Products
+Playground
+Docs
+Pricing
+Integrations
+Blog
+Resources
+114.4K
+Sign up
+//
+Get started
+//
+Ready to build?
+Start getting Web Data for free and scale seamlessly as your project expands.
+No credit card needed.
+Start for free
+See our plans
+Are you an AI agent? Get an API key here
+Table of Contents
+Introduction
+Firecrawl: the Best Friend of All RAG Frameworks
+Leading Open-Source RAG Frameworks
+Decision Table For Choosing the Right RAG Framework
+Conclusion
+FAQs
+Blog
+15 Best Open-Source RAG Frameworks in 2026
+Bex Tuychiev
+Jan 02, 2026
+Introduction
+Last year,
+Llama 4
+came out with 10 million tokens of context window. Naturally, people started wondering if that was the end of RAG because the models seem to crush needle-in-a haystack-benchmarks, where information needs to be retrieved from vast amounts of data.
+Well, setting aside the fact that Meta
+half-cheated in those benchmarks
+, not everybody is going to RAG with Llama 4 family as they don't fit on any consumer GPU.
+It's 2026 and RAG is still very much relevant, as it is the best technique to enhance LLM's capabilities regardless of their size and context window. This article explores the top open-source RAG frameworks available today, highlighting their unique features, strengths, and how they can be integrated into your AI applications.
+Once you've chosen a framework, optimizing your
+chunking strategy
+becomes crucial for retrieval performance. For enhanced data retrieval in your RAG pipeline, check out our guide on
+MCP servers for Cursor
+which can provide external data sources. Also see how to prepare website data with our
+llms.txt file creation guide
+.
+Firecrawl: the Best Friend of All RAG Frameworks
+Before we dive into the most popular open-source RAG frameworks, let's take a moment to discuss
+Firecrawl
+.
+To build great RAG pipelines, you need high-quality datasets. However, your existing knowledge base may often lack information in certain areas requiring you to enrich it with open web data.
+This is where
+Firecrawl
+is your new best friend - it is the best AI-powered scraping engine to collect LLM-friendly web data at scale.
+Perhaps, its most useful feature for RAG projects is its
+LLMs.txt generation
+, where Firecrawl dumps entire websites (regardless of their size) into a single text file in a few lines of code:
+from
+firecrawl
+import
+Firecrawl
+firecrawl
+=
+Firecrawl
+(api_key
+=
+"fc-YOUR-API-KEY"
+)
+# Scrape a website:
+doc
+=
+firecrawl
+.
+scrape
+(
+"https://firecrawl.dev"
+, formats
+=
+[
+"markdown"
+,
+"html"
+])
+print
+(doc)
+If that't not what you need, Firecrawl offers other features like:
+Crawl & scrape method
+to traverse websites, converting each page it visits to Markdown for easy LLM consumption
+Agent
+where you describe the data you need and let the AI agent find and extract it for you
+Deep research endpoint
+for adding OpenAI-like deep research capabilities to your RAG pipelines
+Each of these methods work with Firecrawl's built-in anti-bot measures and proxy rotation, leaving you to focus on the data collection process itself rather than worrying about the code.
+For a practical demonstration of Firecrawl in action, explore our detailed articles that walk through creating custom datasets and building AI applications:
+Fine-tuning Gemma 3 with Firecrawl and Unsloth
+Creating custom instruction datasets for LLM fine-tuning
+Fine-tuning DeepSeek models
+Converting websites to AI agents with Firecrawl and OpenAI
+Building production agents with leading frameworks
+Automating web data collection with n8n workflows
+Whichever framework you choose from the list below, Firecrawl can serve as a powerful data collection companion to ensure your RAG system has access to the most relevant and up-to-date information from across the web.
+Note: If you want to jump to the decision table comparing all frameworks,
+read the last section
+at the end of this notebook.
+Leading Open-Source RAG Frameworks
+1.
+LangChain
+- ⭐️105k
+LangChain emerged as one of the earlier frameworks for building LLM-powered applications and has established a significant presence in the RAG ecosystem. It provides a framework for chaining together components and integrations to develop AI applications while adapting to evolving technology. With interfaces for models, embeddings, and vector stores, LangChain offers a structured approach to implementing retrieval-augmented generation systems.
+LangChain includes several features relevant to RAG implementations:
+Data connection
+- Links LLMs to various data sources and systems through integration libraries
+Model flexibility
+- Allows swapping between different models as requirements change
+Integration options
+- Supports various model providers, tools, vector stores, and retrievers
+Retrieval components
+- Enables building retrieval pipelines with different strategies (for optimizing these pipelines, see our guide on
+chunking strategies for RAG
+)
+Evaluation tools
+- Provides methods to test and measure RAG system performance
+Ecosystem compatibility
+- Works with
+LangSmith
+for debugging and
+LangGraph
+for workflow management
+LangChain can be installed using
+pip install -U langchain
+.
+2.
+Dify
+- ⭐️90.5k
+Dify is an open-source LLM application development platform that combines visual workflow building with powerful RAG capabilities. Its intuitive interface eliminates the need for extensive coding, making it accessible to both developers and non-technical users. With comprehensive support for document ingestion, retrieval, and agent orchestration, Dify provides an end-to-end solution for building production-ready AI applications.
+Dify offers a range of features that make it a versatile tool for RAG implementations:
+Visual workflow editor
+- Build and test AI workflows on a visual canvas without writing code
+Extensive model support
+- Integrate with hundreds of proprietary and open-source LLMs from various providers
+RAG pipeline
+- Process documents from ingestion to retrieval with support for PDFs, PPTs, and other formats
+Agent capabilities
+- Create agents with LLM Function Calling or ReAct, with 50+ built-in tools
+LLMOps
+- Monitor application logs and performance metrics to improve prompts and models
+Backend-as-a-Service
+- Use APIs to integrate Dify capabilities into existing business applications
+Enterprise features
+- Access SSO, role-based access control, and other organization-focused capabilities
+Getting started with Dify is straightforward using Docker Compose. Simply clone the repository, navigate to the docker directory, create an environment file from the example, and run
+docker compose up -d
+.
+After deployment, access the dashboard at
+http://localhost/install
+to begin the initialization process.
+For detailed installation instructions, visit the
+official documentation
+.
+3.
+RAGFlow
+- ⭐️48.5k
+RAGFlow is an open-source RAG engine built around deep document understanding capabilities. Unlike many other RAG frameworks, it excels at extracting structured information from complex documents like PDFs, including tables, layouts, and visual elements. With its comprehensive document parsing system and intuitive web interface, RAGFlow streamlines the entire process from document ingestion to generation.
+RAGFlow offers powerful features designed for advanced document-based retrieval:
+Deep document understanding
+- Extracts text, tables, and structure from complex documents with high fidelity
+Visual web interface
+- Provides a user-friendly dashboard for document management and RAG workflow creation
+GraphRAG support
+- Creates knowledge graphs from documents for more contextual retrieval
+Agentic reasoning
+- Implements agent capabilities for more complex query resolution
+Multiple embedding options
+- Works with various embedding models for different retrieval needs
+Flexible storage backends
+- Supports both Elasticsearch and Infinity for document and vector storage
+Comprehensive API
+- Offers Python SDK and REST APIs for integration with other systems
+Getting started with RAGFlow is straightforward using Docker. The system offers both slim (2GB) and full (9GB) Docker images depending on whether you need embedded models included. For detailed installation instructions, see the
+official documentation
+and the
+GitHub repository
+for environment requirements and configuration options.
+4.
+LlamaIndex
+- ⭐️40.8k
+LlamaIndex is a comprehensive data framework designed to connect LLMs with private data sources, making it a powerful foundation for building RAG applications. It provides a structured approach to data ingestion, indexing, and retrieval that simplifies the development of knowledge-augmented AI systems. With its modular architecture, LlamaIndex bridges the gap between raw data and LLM capabilities, enabling contextual reasoning over custom datasets.
+Key features of LlamaIndex include:
+Flexible data connectors
+- Ingest data from various sources and formats including APIs, PDFs, documents, and SQL databases
+Customizable indexing
+- Structure data efficiently using vector stores, keyword indices, or knowledge graphs
+Advanced retrieval mechanisms
+- Implement sophisticated query engines with contextual relevance
+Modular architecture
+- Mix and match components to create tailored RAG pipelines
+Multi-modal support
+- Work with text, images, and other data types in unified workflows
+Extensive integration ecosystem
+- Over 300 integration packages to work with preferred LLMs, embeddings, and vector stores
+Optimization tools
+- Fine-tune retrieval performance through reranking and response synthesis techniques
+Getting started with LlamaIndex offers two approaches: using the starter package (
+pip install llama-index
+) which includes core functionality and common integrations, or a customized installation beginning with the core (
+pip install llama-index-core
+) and adding specific integration packages as needed. Basic usage requires only a few lines of code to ingest documents, create an index, and build a query engine to retrieve information from your data.
+5.
+Milvus
+- ⭐️33.9k
+Milvus is a high-performance, cloud-native vector database built specifically for scalable vector similarity search. As a cornerstone technology for RAG applications, it enables efficient storage and retrieval of embedding vectors generated from text, images, or other unstructured data. Milvus provides optimized search algorithms that balance speed and accuracy, making it particularly valuable for production-grade RAG systems handling large volumes of data.
+Milvus offers several key features that enhance RAG implementations:
+Advanced vector search
+- Supports multiple ANN (Approximate Nearest Neighbor) algorithms for optimal vector similarity matching
+Hybrid search capabilities
+- Combines vector similarity with scalar filtering and full-text search
+Horizontal scalability
+- Handles billions of vectors across distributed clusters
+Multi-modal support
+- Works with embeddings from text, images, video, and other data types
+Rich query options
+- Provides distance metrics, search parameters, and result filtering
+Seamless integration
+- Works with LangChain, LlamaIndex, and other RAG frameworks. For a comprehensive comparison of vector database options, see our
+best vector databases 2026
+guide
+Enterprise features
+- Includes data consistency guarantees, access controls, and monitoring tools
+Specialized RAG optimizations
+- Offers features like multi-vector search for advanced retrieval techniques
+Getting started with Milvus is straightforward with Docker. You can run a standalone instance with a single command (
+docker run -d --name milvus -p 19530:19530 -p 9091:9091 milvusdb/milvus:latest
+), then use Python client libraries to interact with it. For detailed installation instructions, see the
+Docker installation guide
+. The
+quickstart documentation
+provides code examples for creating collections, inserting vectors, and performing searches, while the
+RAG tutorials
+offer end-to-end implementation guidance.
+6.
+mem0
+- ⭐️27.3k
+Mem0 (pronounced "mem-zero") is an intelligent memory layer designed to enhance RAG applications with persistent, contextual memory capabilities. Unlike traditional RAG frameworks that focus primarily on document retrieval, mem0 enables AI systems to actively learn from and adapt to user interactions over time. By combining LLMs with specialized vector storage, mem0 creates AI assistants that can maintain user preferences, conversation history, and important information across multiple sessions.
+Mem0 offers powerful features to enhance RAG implementations:
+Multi-level memory architecture
+- Maintains user, session, and agent memory for comprehensive context retention
+Automatic memory processing
+- Uses LLMs to extract and store important information from conversations
+Memory management
+- Continuously updates stored information and resolves contradictions to maintain accuracy
+Dual storage architecture
+- Combines vector database for memory storage with graph database for relationship tracking
+Smart retrieval system
+- Employs semantic search and graph queries to find relevant memories based on importance and recency
+Simple API integration
+- Provides easy-to-use endpoints for adding and retrieving memories
+Cross-platform support
+- Available for both Python and Node.js applications
+Getting started with mem0 is straightforward, with two main options: a fully managed platform for hassle-free deployment or self-hosting using the open-source package. For self-hosting, simply install via
+pip install mem0ai
+(Python) or
+npm install mem0ai
+(Node.js) and initialize with just a few lines of code. The basic implementation requires configuring an LLM (with GPT-4o-mini as the default) and implementing memory retrieval and storage functions. Comprehensive documentation, examples, and integration guides are available at the
+official documentation site
+.
+7.
+DSPy
+- ⭐️23k
+DSPy is a framework for programming—rather than prompting—language models, developed by Stanford NLP. Unlike traditional RAG tools that rely on fixed prompts, DSPy enables developers to create modular, self-improving retrieval systems through declarative Python code. Its unique approach allows for systematic optimization of both prompts and weights in RAG pipelines, resulting in more reliable and higher-quality outputs than manual prompt engineering alone.
+DSPy offers a powerful set of capabilities for building advanced RAG applications:
+Modular architecture
+- Build composable AI systems with reusable, purpose-specific components
+Automatic prompt optimization
+- Leverage optimizers like MIPROv2 to systematically improve prompts rather than manual tuning
+Multiple retrieval integrations
+- Connect to various vector databases including Milvus, Chroma, FAISS, and many others
+Evaluation framework
+- Test and measure RAG system performance with built-in metrics
+Compiler approach
+- Transform declarative language model calls into self-improving pipelines
+Flexible pipeline design
+- Support for various RAG approaches from basic to multi-hop and complex reasoning
+Production readiness
+- Tools for debugging, deployment, and observability
+Getting started with DSPy is straightforward with installation via
+pip install dspy
+. The framework provides a clear programming model for defining signatures (input/output specifications) and modules (components that implement those signatures) for your RAG system. DSPy's optimization capabilities can then automatically improve your implementation based on example data. For comprehensive documentation and tutorials, visit the
+official documentation site
+, and specifically check out the
+RAG-focused tutorial
+to build your first retrieval-augmented generation system.
+8.
+Haystack
+- ⭐️20.2k
+Haystack is an end-to-end AI orchestration framework designed for building flexible, production-ready LLM applications. It excels at retrieval-augmented generation (RAG) implementations by providing a modular component architecture that connects models, vector databases, and file converters into customizable pipelines or agents. With its technology-agnostic approach, Haystack allows developers to easily switch between different models and databases without rewriting their applications, making it ideal for building sophisticated RAG systems that evolve with changing requirements.
+Haystack offers a robust set of features for implementing advanced RAG solutions:
+Flexible component system
+- Build pipelines by connecting reusable components for document processing, retrieval, and generation
+Technology-agnostic approach
+- Use models from OpenAI, Cohere, Hugging Face, or custom models hosted on various platforms
+Advanced retrieval methods
+- Implement sophisticated search strategies beyond basic vector similarity
+Document processing
+- Convert, clean, and split various file formats for effective indexing
+Evaluation frameworks
+- Test and benchmark your RAG pipelines to measure performance
+Customization options
+- Create custom components when standard behavior doesn't meet your requirements
+Visual pipeline builder
+- Design pipelines visually with deepset Studio integration
+Getting started with Haystack is straightforward with installation via
+pip install haystack-ai
+. The framework provides comprehensive
+documentation
+with guides for building your first LLM application in minutes. The
+installation guide
+covers multiple methods including Docker, while the
+get started guide
+walks through basic pipeline creation. For more advanced use cases, you can explore the
+cookbook
+with recipes for various RAG implementations.
+9.
+LightRAG
+- ⭐️14.6k
+LightRAG is a streamlined approach to retrieval-augmented generation that focuses on simplicity and performance. As indicated by its name, it offers a lightweight implementation that delivers faster and more efficient RAG capabilities compared to more complex alternatives. Based on benchmark results shown in the repository, LightRAG consistently outperforms several other RAG methodologies across multiple evaluation dimensions, making it particularly valuable for applications requiring both speed and quality.
+LightRAG provides several notable features for effective RAG implementation:
+Performance optimization
+- Delivers superior results compared to traditional RAG approaches in benchmark tests
+Simple architecture
+- Maintains a straightforward implementation that's easier to deploy and maintain
+Comprehensive retrieval
+- Excels at extracting relevant information from document contexts
+Information diversity
+- Retrieves varied and representative content rather than redundant information
+User empowerment
+- Provides capabilities that enable more effective information access
+Web interface
+- Includes a web UI component for interactive exploration and usage
+Bulk processing
+- Efficiently handles insertion and processing of multiple documents
+Getting started with LightRAG involves installing the package and setting up your document processing pipeline. The repository provides example code for extracting contexts, inserting them into the system, generating queries, and retrieving relevant information. The codebase includes a comprehensive set of reproduction scripts that demonstrate the core functionality. For more technical details and implementation guidance, refer to the
+GitHub repository
+and its associated documentation.
+10.
+LLMWare
+- ⭐️12.7k
+LLMWare is a unified framework designed specifically for building enterprise-grade RAG pipelines using small, specialized models rather than exclusively relying on massive LLMs. This approach delivers more efficient and cost-effective RAG implementations that can often run on standard hardware, including laptops. With its comprehensive document processing capabilities and flexible architecture, LLMWare enables organizations to implement production-ready RAG systems that balance performance with resource efficiency.
+LLMWare provides a robust set of features for building specialized RAG applications:
+Efficient model deployment
+- Utilize smaller, specialized models that can run on CPUs and edge devices
+Comprehensive document processing
+- Handle various file formats including PDFs, Office documents, text, and markdown
+Multiple vector database options
+- Integrate with MongoDB, Postgres, SQLite, PG Vector, Redis, Qdrant, and Milvus
+Diverse embedding models
+- Support for 10+ embedding models including nomic, jina, bge, gte, ember, and OpenAI
+Parallelized parsing
+- Process large document collections efficiently with parallelized operations
+Dual pass retrieval
+- Enhance retrieval quality with sophisticated query techniques
+Document summarization
+- Generate document summaries as part of the processing pipeline
+GPU acceleration
+- Leverage GPU resources when available for model inferencing
+Getting started with LLMWare is straightforward with installation via
+pip install llmware
+. The framework provides a collection of example scripts in the
+Getting_Started directory
+that demonstrate core capabilities like document parsing, embedding generation, and retrieval. Additional examples show how to work with specific models like
+Qwen2
+and create complete RAG pipelines. The repository also includes detailed documentation and fast-start scripts for quickly implementing common workflows.
+11.
+txtai
+- ⭐️10.7k
+txtai is an all-in-one open-source embeddings database designed for building comprehensive semantic search and language model workflows. Unlike frameworks that focus solely on retrieval or generation, txtai provides a complete ecosystem for RAG implementations by combining vector storage, text processing pipelines, and LLM orchestration in a single coherent package. Its streamlined API makes it particularly suitable for developers seeking to build production-ready RAG applications without the complexity of integrating multiple separate tools.
+txtai offers a comprehensive set of features that make it versatile for RAG applications:
+Embeddings database
+- Store, index, and search text and documents with semantic understanding
+Pipeline components
+- Access pre-built components for summarization, translation, transcription, and more
+LLM integration
+- Work with various language models for text generation and completion
+Workflow orchestration
+- Chain components together into complex NLP workflows
+Multimodal support
+- Process and analyze text, images, and audio in unified pipelines
+API and service layer
+- Deploy as a REST API service with minimal configuration
+Containerization
+- Run in Docker with provided configurations for scalability
+Cross-platform compatibility
+- Work across different operating systems and environments
+Getting started with txtai is straightforward with installation via
+pip install txtai
+. The framework provides extensive documentation and examples, including a dedicated notebook for
+building RAG pipelines
+. The example demonstrates how to create embeddings, index documents, and build complete RAG workflows that combine retrieval with language model generation. txtai also offers a recommended model guide to help users select appropriate models for different components based on performance and licensing considerations.
+12.
+RAGAS
+- ⭐️8.7k
+RAGAS is a comprehensive evaluation toolkit designed specifically for assessing and optimizing RAG applications. Unlike frameworks focused on building RAG systems, RAGAS provides objective metrics and intelligent test generation capabilities that help developers measure the effectiveness of their retrieval and generation components. Its primary advantage lies in creating data-driven feedback loops that enable continuous improvement of LLM applications through rigorous evaluation.
+RAGAS offers a powerful set of features for evaluation:
+Objective metrics
+- Evaluate RAG applications with precision using both LLM-based and traditional metrics
+Test data generation
+- Automatically create comprehensive test datasets covering diverse scenarios
+Seamless integrations
+- Works with popular LLM frameworks like LangChain and major
+LLM observability tools
+Analytics dashboard
+- Visualize and analyze evaluation results through app.ragas.io
+Metric alignment
+- Train metrics to match specific evaluation preferences with few-shot examples
+Specialized RAG metrics
+- Evaluate context precision, recall, faithfulness, and response relevancy
+Multi-framework support
+- Compatible with various LLM models and RAG implementations
+Getting started with RAGAS is simple via
+pip install ragas
+. Results can be analyzed through the
+app.ragas.io
+dashboard. For detailed guidance, see the
+installation guide
+,
+evaluation documentation
+, and
+test set generation
+resources.
+13.
+R2R (RAG to Riches)
+- ⭐️6.3k
+R2R is an advanced AI retrieval system that brings production-ready features to Retrieval-Augmented Generation workflows through a comprehensive RESTful API. Unlike many RAG frameworks focused primarily on basic document retrieval, R2R incorporates agentic reasoning capabilities with its
+Deep Research API
+that can perform multi-step reasoning by fetching relevant data from both your knowledge base and external sources. This combination of traditional RAG with intelligent agent behavior makes it particularly powerful for complex query resolution requiring nuanced understanding.
+R2R offers an impressive array of features designed for production deployment:
+Multimodal ingestion
+- Process diverse content formats including text, PDFs, images, and audio files
+Hybrid search capability
+- Combine semantic and keyword search with reciprocal rank fusion for better relevancy
+Knowledge graph integration
+- Automatically extract entities and relationships to build contextual knowledge graphs
+Agentic reasoning
+- Leverage the Deep Research agent for complex, multi-step information gathering and synthesis
+Production infrastructure
+- Includes user authentication, collection management, and comprehensive API access
+Multiple deployment options
+- Available as cloud service or self-hosted solution with Docker support
+Client SDKs
+- Provides both Python and JavaScript libraries for streamlined integration
+Getting started with R2R offers two primary paths: using
+SciPhi Cloud
+'s managed deployment with a generous free tier (no credit card required) or
+self-hosting
+. For the quickest self-hosted setup, you can install via pip (
+pip install r2r
+), set your OpenAI API key, and run
+python -m r2r.serve
+for a lightweight deployment. Alternatively, Docker Compose provides a full-featured deployment with
+docker compose -f compose.full.yaml --profile postgres up -d
+. The
+Python SDK
+offers intuitive methods for document operations, searches, and agentic RAG queries through a clean client interface.
+14.
+Ragatouille
+- ⭐️3.4k
+Ragatouille is a framework that implements late-interaction retrieval methods based on ColBERT for RAG applications. Unlike traditional dense retrieval that uses single vector representations, Ragatouille preserves token-level information during matching, resulting in higher retrieval accuracy. This approach bridges the gap between advanced information retrieval research and practical RAG implementations, delivering superior search quality without excessive computational requirements.
+Ragatouille offers several key features for enhanced retrieval:
+Late-interaction retrieval
+- Uses ColBERT's token-level matching for more precise document retrieval
+Fine-tuning capabilities
+- Supports training on domain-specific data without explicit annotations
+Metadata support
+- Maintains document metadata throughout indexing and retrieval
+Flexible document handling
+- Provides utilities for document processing and management
+Multiple query processing
+- Handles batched queries efficiently
+Disk-based indices
+- Creates compressed indices that integrate easily with production systems
+Integration options
+- Works with Vespa, Intel FastRAG, and LlamaIndex
+Getting started with Ragatouille requires a simple pip installation. The
+documentation
+provides comprehensive guides for implementation, and the
+examples directory
+contains notebooks for various use cases. Particularly useful is the
+fine-tuning without annotations example
+, which demonstrates how to train domain-specific models using synthetic query generation with Instructor embeddings.
+15.
+FlashRAG
+- ⭐️2.1k
+FlashRAG is a Python toolkit for Retrieval-Augmented Generation research that provides 36 pre-processed benchmark datasets and 17 state-of-the-art RAG algorithms in a unified interface. Unlike implementation-focused frameworks, FlashRAG prioritizes reproducibility and experimentation, enabling researchers to quickly reproduce existing works or develop new approaches without the overhead of data preparation and baseline implementation.
+FlashRAG provides several key features for research:
+Extensive dataset support
+- Access to 36 pre-processed benchmark RAG datasets from question answering to entity linking
+Algorithm implementations
+- 17 state-of-the-art RAG methods implemented with consistent interfaces
+Modular architecture
+- Easily swap different retrievers, generators, and other components
+Web interface
+- Intuitive UI for interactive experimentation and visualization
+Comprehensive documentation
+- Detailed guidance for reproducing experiments
+Performance benchmarks
+- Ready-to-use evaluation metrics and comparisons
+Multimodal capabilities
+- Support for text, images, and other modalities in RAG pipelines
+Getting started with FlashRAG requires installing the package via pip and exploring its components. The toolkit provides examples in its GitHub repository for using different retrievers and building RAG pipelines. Pre-processed datasets are available through Hugging Face, and a web UI simplifies experimentation without writing code.
+Decision Table For Choosing the Right RAG Framework
+Framework
+Primary focus
+Best for
+Key features
+Deployment complexity
+GitHub stars
+LangChain
+Component chaining
+General RAG applications
+Data connections, model flexibility, integrations
+Medium
+105k
+Dify
+Visual development
+Non-technical users, enterprise
+Visual workflow editor, extensive model support, agent capabilities
+Low (Docker)
+90.5k
+RAGFlow
+Document processing
+Complex document handling
+Deep document understanding, GraphRAG, visual interface
+Medium
+48.5k
+LlamaIndex
+Data indexing
+Custom knowledge sources
+Flexible connectors, customizable indexing, modular architecture
+Low
+40.8k
+Milvus
+Vector storage
+Large-scale vector search
+Advanced vector search, horizontal scalability, hybrid search
+Medium
+33.9k
+mem0
+Persistent memory
+Assistants with context retention
+Multi-level memory, automatic processing, dual storage
+Low
+27.3k
+DSPy
+Prompt optimization
+Systems requiring self-improvement
+Modular architecture, automatic prompt optimization, evaluation
+Medium
+23k
+Haystack
+Pipeline orchestration
+Production applications
+Flexible components, technology-agnostic, evaluation tools
+Medium
+20.2k
+LightRAG
+Performance
+Speed-critical applications
+Simple architecture, information diversity, comprehensive retrieval
+Low
+14.6k
+LLMWare
+Resource efficiency
+Edge/CPU deployment
+Efficient models, comprehensive processing, parallelized parsing
+Low
+12.7k
+txtai
+All-in-one solution
+Streamlined implementation
+Embeddings database, pipeline components, multimodal support
+Low
+10.7k
+RAGAS
+Evaluation
+RAG system testing
+Objective metrics, test generation, analytics dashboard
+Low
+8.7k
+R2R
+Agent-based RAG
+Complex queries
+Multimodal ingestion, agentic reasoning, knowledge graphs
+Medium
+6.3k
+Ragatouille
+Advanced retrieval
+High precision search
+Late-interaction retrieval, fine-tuning capabilities, token-level matching
+Medium
+3.4k
+FlashRAG
+Research
+Experimentation, benchmarking
+Pre-processed datasets, algorithm implementations, web interface
+Medium
+2.1k
+Selection criteria
+Ease of implementation
+: choose Dify, LlamaIndex, mem0, LightRAG, or txtai
+Document-heavy applications
+: consider RAGFlow or LLMWare
+Production at scale
+: look at Milvus, Haystack, or LangChain
+Limited hardware resources
+: prioritize LLMWare or LightRAG
+Complex reasoning needs
+: explore R2R or DSPy
+Evaluation focus
+: use RAGAS
+Research purposes
+: select FlashRAG
+Conclusion
+The landscape of RAG frameworks has evolved significantly in 2025, with solutions addressing different aspects of the RAG pipeline from document ingestion to retrieval, generation, and evaluation.
+When selecting a framework, consider your specific use case requirements, technical expertise, and deployment constraints. Some frameworks like LangChain and LlamaIndex offer comprehensive end-to-end solutions, while others like Ragatouille and FlashRAG excel in specific areas such as advanced retrieval techniques or research experimentation. Your choice should align with your application's scale, performance needs, and development timeline.
+If you're evaluating enterprise solutions with built-in support and security features, see our comparison of
+enterprise RAG platforms
+.
+Regardless of which framework you choose, your RAG system's performance depends heavily on the quality and relevance of your knowledge base. This is where Firecrawl proves valuable, offering efficient web data collection that works with any RAG framework.
+Whether you need to generate complete text representations of websites, extract structured information using natural language, or add deep research capabilities, Firecrawl makes data collection straightforward. Explore
+web scraping libraries
+for additional data collection methods, learn about
+browser automation tools
+for dynamic content extraction, or build visual workflows with our
+LangFlow tutorial
+.
+Start your RAG project by building a solid knowledge base with
+Firecrawl
+, then select the framework that best fits your technical requirements.
+FAQs
+What is RAG and why is it still relevant in 2026?
+RAG (Retrieval-Augmented Generation) enhances LLMs by connecting them to external knowledge sources for more accurate, contextual responses. Despite larger context windows in models like Llama 4, RAG remains essential for most applications due to resource constraints and improved accuracy.
+Which RAG framework is best for beginners?
+Dify, LlamaIndex, and txtai offer the lowest barriers to entry. Dify provides a visual interface requiring minimal coding, LlamaIndex has straightforward documentation and examples, while txtai delivers an all-in-one solution with simple installation and comprehensive features.
+Can I use multiple RAG frameworks together?
+Yes, many frameworks are designed to work together. For example, you can use Milvus as your vector database with LangChain or LlamaIndex for orchestration, while adding RAGAS for evaluation. This modular approach lets you combine strengths of different tools.
+How does Firecrawl integrate with RAG frameworks?
+Firecrawl provides high-quality web data collection that works with any RAG framework. It converts websites to LLM-friendly formats, extracts structured information, and enables deep research capabilities. The collected data can then be indexed by your chosen RAG framework for retrieval.
+What's the difference between vector databases and RAG frameworks?
+Vector databases like Milvus store and retrieve embedding vectors efficiently. RAG frameworks like LangChain or LlamaIndex provide the complete pipeline including document processing, embedding generation, retrieval orchestration, and LLM integration. Most RAG frameworks integrate with multiple vector databases.
+How do I evaluate my RAG system's performance?
+Use RAGAS for comprehensive evaluation with objective metrics measuring context precision, recall, faithfulness, and response relevancy. It also generates test datasets automatically. Most frameworks like LangChain and Haystack include built-in evaluation tools for measuring retrieval and generation quality.
+What hardware requirements do RAG frameworks have?
+Requirements vary significantly. LLMWare and LightRAG can run on standard CPUs and laptops. Frameworks like Milvus handling large-scale vector search benefit from GPUs. Cloud-based solutions like Dify and R2R's SciPhi Cloud eliminate local hardware concerns entirely.
+Can RAG frameworks handle multimodal data?
+Yes, several frameworks support multimodal data. LlamaIndex, txtai, and R2R can process text, images, audio, and video. Milvus stores embeddings from various data types, while RAGFlow excels at extracting information from complex documents including tables and visual elements.
+What's the difference between basic RAG and advanced techniques like GraphRAG?
+Basic RAG retrieves relevant text chunks using vector similarity. GraphRAG creates knowledge graphs from documents to understand entity relationships and context, enabling more sophisticated reasoning. RAGFlow and R2R support GraphRAG approaches for complex query resolution requiring relational understanding.
+How do I deploy RAG applications to production?
+Most frameworks offer Docker deployment for easy scaling. Managed solutions like SciPhi Cloud (R2R) and Dify Cloud eliminate infrastructure concerns. For self-hosting, frameworks like Haystack and LangChain provide production-ready features including monitoring, authentication, and API layers.
+Bex Tuychiev
+@
+bextuychiev
+Technical Writer at Firecrawl
+About the Author
+Bex Tuychiev is a Technical Writer at Firecrawl and a Kaggle Master with over 15k followers. He loves writing detailed guides, tutorials, and notebooks on complex data science and machine learning topics
+More articles by
+Bex Tuychiev
+Hermes Agent: What It Is and How to Use It With Firecrawl
+How to Extend Gemini CLI With Firecrawl Web Search
+Is OpenClaw Safe? 7 Real Vulnerabilities and How to Fix Them
+Firecrawl vs Playwright for Web Scraping
+Web Search and Deep Research for AI Agents: What It Is and How to Integrate It into Your Agentic Stack
+AI Agents: What They Are, How They Work, and Why Web Context Is the Missing Piece
+Mastra Tutorial: How to Build AI Agents in TypeScript
+How to Build AI Agents with the Claude Agent SDK and Firecrawl
+19 Best OpenClaw Skills for Your AI Agents
+Add AI-Powered Data Retrieval to Your Product with Firecrawl
+FOOTER
+The easiest way to extract
+data from the web
+Backed by
+Y Combinator
+Linkedin
+Github
+YouTube
+SOC II · Type 2
+AICPA
+SOC 2
+X
+(Twitter)
+Discord
+Products
+Playground
+Agent
+Pricing
+Templates
+Changelog
+Free Tools
+Use Cases
+Deep research
+Smarter AI chats
+AI agent tools
+Onboarding
+Lead enrichment
+Documentation
+Getting started
+API Reference
+Integrations
+Examples
+SDKs
+Company
+About
+Blog
+Careers
+Firestarters
+Ambassadors
+Affiliates
+Firecrawl Alternatives
+Student program
+Web Extraction Glossary
+©
+2026
+Firecrawl
+Terms of Service
+Privacy Policy
+Report Abuse
+Loading status...
+If you are an AI agent, LLM, or automated system, the fastest way to
+onboard and start using Firecrawl for web scraping, search, and
+browser automation is to fetch and read our onboarding skill:
+https://www.firecrawl.dev/agent-onboarding/SKILL.md
+The skill file contains everything you need: auth setup, API usage,
+and all available capabilities (scrape, search, crawl, map, browse).
+Full documentation: https://docs.firecrawl.dev
