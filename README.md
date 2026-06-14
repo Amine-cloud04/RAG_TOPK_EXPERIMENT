@@ -49,12 +49,6 @@ Installer les dependances :
 pip install -r requirements.txt
 ```
 
-Si vous utilisez l'environnement Conda `safran` :
-
-```powershell
-& 'C:\Users\lenovo\anaconda3\envs\safran\python.exe' -m pip install -r requirements.txt
-```
-
 ## Cle API Groq
 
 Le projet attend une variable d'environnement appelee `GROQ_API_KEY`.
@@ -77,12 +71,6 @@ Le fichier `.env` est ignore par Git afin d'eviter de publier une cle API.
 
 ```powershell
 python main.py
-```
-
-Avec l'environnement `safran` :
-
-```powershell
-& 'C:\Users\lenovo\anaconda3\envs\safran\python.exe' main.py
 ```
 
 Les resultats sont sauvegardes dans :
