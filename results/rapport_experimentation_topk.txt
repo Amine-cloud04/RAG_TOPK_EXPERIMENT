@@ -1,0 +1,180 @@
+Rapport d'experimentation RAG: analyse du parametre Top-K
+==============================================================
+
+Objectif du projet
+-----------------
+Ce projet etudie l'impact du parametre Top-K dans une solution RAG.
+L'experience compare plusieurs valeurs de K afin de mesurer:
+- l'impact d'un K faible par rapport a un K eleve;
+- le compromis entre qualite des reponses et performance;
+- la valeur de Top-K la plus pertinente pour ce corpus.
+
+Methodologie
+-----------
+Le pipeline charge les documents du dossier data/, les decoupe en chunks,
+calcule des embeddings avec sentence-transformers, indexe les chunks dans
+ChromaDB, puis interroge un modele LLM avec les contextes recuperes.
+Les valeurs de K comparees sont: 1, 2, 3, 5, 7, 10, 15, 20.
+Chaque valeur de K est evaluee sur 30 questions.
+Les contextes recuperes et les mesures memoire sont disponibles pour cette experience.
+
+Dimensionnement du corpus
+------------------------
+Nombre de documents: 15 (objectif academique: 15-30).
+Nombre de chunks: 1118 (objectif academique: 500-1500).
+Taille des chunks: 600 caracteres, overlap: 100 caracteres.
+Objectif corpus respecte: True.
+
+Indicateurs utilises
+-------------------
+- Latence moyenne: temps moyen necessaire pour recuperer le contexte et generer la reponse.
+- Taux de couverture: proportion de questions ayant recu une reponse exploitable.
+- Qualite: score heuristique, BLEU, ROUGE-L, similarite semantique,
+  answer relevance et faithfulness proxy.
+- Performance: latence moyenne et memoire utilisee.
+- Retrieval: precision, rappel et verification de la presence de la bonne source.
+- Score final: combinaison ponderee de la qualite, du retrieval, de la couverture et de la latence.
+
+Resultats synthetiques
+---------------------
+K | Latence | Memoire pic MB | Couverture | ROUGE-L | BLEU | Relevance | Faithfulness | Recall retrieval | Score final
+--|---------|----------------|------------|---------|------|-----------|--------------|------------------|------------
+1 | 0.992s | 0.076 | 47% | 0.158 | 0.086 | 0.066 | 0.126 | 0.406 | 0.455
+2 | 0.948s | 0.073 | 50% | 0.173 | 0.091 | 0.075 | 0.152 | 0.550 | 0.500
+3 | 1.329s | 0.078 | 57% | 0.196 | 0.092 | 0.078 | 0.198 | 0.656 | 0.541
+5 | 1.767s | 0.086 | 60% | 0.176 | 0.071 | 0.064 | 0.203 | 0.739 | 0.556
+7 | 1.734s | 0.092 | 63% | 0.193 | 0.091 | 0.069 | 0.209 | 0.811 | 0.586
+10 | 2.879s | 0.108 | 67% | 0.190 | 0.085 | 0.063 | 0.208 | 0.889 | 0.587
+15 | 7.042s | 0.138 | 70% | 0.191 | 0.086 | 0.069 | 0.213 | 0.889 | 0.516
+20 | 10.802s | 0.159 | 67% | 0.186 | 0.086 | 0.062 | 0.214 | 0.906 | 0.431
+
+Robustesse statistique
+----------------------
+Les valeurs du tableau sont des moyennes calculees pour chaque valeur de K.
+Comme l'experience utilise un nombre limite de questions, il faut interpreter
+les resultats comme une comparaison experimentale sur ce corpus, et non comme
+une preuve universelle. Pour renforcer l'analyse, le tableau ci-dessous ajoute
+l'ecart-type et un intervalle de confiance approximatif a 95%.
+
+K | Latence moyenne +/- IC95 | Qualite moyenne +/- IC95 | ROUGE-L moyen +/- IC95
+--|--------------------------|--------------------------|----------------------
+1 | 0.992s +/- 0.059 | 2.57/5 +/- 0.64 | 0.158 +/- 0.080
+2 | 0.948s +/- 0.047 | 2.70/5 +/- 0.64 | 0.173 +/- 0.079
+3 | 1.329s +/- 0.378 | 2.97/5 +/- 0.65 | 0.196 +/- 0.081
+5 | 1.767s +/- 0.509 | 3.13/5 +/- 0.66 | 0.176 +/- 0.058
+7 | 1.734s +/- 0.503 | 3.30/5 +/- 0.65 | 0.193 +/- 0.074
+10 | 2.879s +/- 0.905 | 3.40/5 +/- 0.64 | 0.190 +/- 0.068
+15 | 7.042s +/- 0.955 | 3.63/5 +/- 0.64 | 0.191 +/- 0.067
+20 | 10.802s +/- 0.389 | 3.47/5 +/- 0.66 | 0.186 +/- 0.070
+
+Test t de Student
+-----------------
+Un test t apparie compare le score final par question de K=10
+avec chaque autre valeur de K. Le test est apparie car les memes questions
+sont evaluees pour toutes les valeurs de K.
+
+K compare | Difference moyenne | t | p-value | Significatif 0.05
+----------|--------------------|---|---------|------------------
+1 | 0.1388 | 3.811 | 0.0007 | True
+2 | 0.0940 | 3.040 | 0.0050 | True
+3 | 0.0518 | 2.178 | 0.0377 | True
+5 | 0.0351 | 1.916 | 0.0652 | False
+7 | 0.0047 | 0.217 | 0.8300 | False
+15 | 0.0546 | 2.742 | 0.0104 | True
+20 | 0.1258 | 6.871 | 0.0000 | True
+
+Analyse de l'impact de K
+-----------------------
+Le K le plus rapide est K=2, avec une latence moyenne de 0.948s. Cependant, sa couverture est de 50%, ce qui montre qu'un K trop faible peut manquer de contexte et produire davantage de reponses insuffisantes.
+
+Le meilleur niveau de qualite brute est observe avec K=15, avec une qualite moyenne de 3.63/5 et une couverture de 70%. Cette valeur recupere plus de contexte, mais elle peut augmenter fortement la latence.
+
+Pollution du contexte
+---------------------
+Le score ROUGE-L atteint son maximum a K=3 (0.196), puis diminue pour plusieurs valeurs plus elevees.
+Ce comportement illustre le phenomene de pollution du contexte: quand K augmente,
+le systeme recupere davantage de chunks, mais tous ne sont pas egalement utiles.
+Des passages secondaires ou redondants peuvent ajouter du bruit dans le prompt,
+ce qui peut rendre la reponse moins proche de la reponse de reference malgre un
+meilleur rappel du retrieval.
+
+Courbe de saturation
+--------------------
+Le rappel du retrieval atteint un palier important a partir de K=10 avec un rappel moyen de 0.889.
+Au-dela, le gain reste limite jusqu'au maximum observe de 0.906,
+tandis que la latence et la taille du contexte continuent d'augmenter.
+K=10 est donc le point de saturation du retrieval, mais
+la recommandation finale reste K=10, car le score global prend
+aussi en compte la qualite des reponses, la couverture, la latence et le
+rappel du retrieval.
+
+Compromis qualite / performance
+------------------------------
+L'augmentation de K ameliore generalement la couverture des reponses, car le modele
+dispose de plus d'informations. En revanche, un K eleve agrandit le prompt, ajoute
+potentiellement du bruit documentaire et augmente le temps de reponse.
+Les metriques BLEU et ROUGE-L comparent la reponse generee a une reponse de reference.
+Les scores answer relevance et faithfulness proxy mesurent respectivement la proximite
+semantique avec la question et la coherence avec les contextes recuperes.
+Les contextes recuperes sont disponibles dans ce CSV, donc le faithfulness proxy est calcule.
+Les mesures memoire sont disponibles pour cette experience.
+
+Precision du retrieval
+----------------------
+La precision du retrieval mesure la proportion de passages recuperes provenant des sources
+attendues. Le rappel mesure la proportion des sources attendues retrouvees par le systeme.
+Quand K augmente, le rappel tend a progresser, mais la precision peut diminuer car le systeme
+ajoute aussi des passages moins directement utiles.
+
+Analyse qualitative
+-------------------
+Exemple 1: How do transformers use attention?
+- K=1: latence 0.768s, recall retrieval 0.500, reponse: Insufficient information.
+- K=10: latence 6.731s, recall retrieval 1.000, reponse: Transformers use attention as a basis to enable the model to capture global dependencies. They have an attention mechanism that allows each element in the input sequence to attend to all others. This is done through scaled dot-product attention units, which learn three weight matrices: query weights, key weights, and value weights. The attention mechanism is used in both the encoder and decoder layers, and it allo...
+- K=20: latence 12.827s, recall retrieval 1.000, reponse: Transformers use attention through a multi-head attention mechanism, where each token is contextualized within the scope of the context window with other tokens via a parallel multi-head attention mechanism. This allows the signal for key tokens to be amplified and less important tokens to be diminished. The attention mechanism is based on scaled dot-product attention units, which learn three weight matrices: quer...
+Cet exemple montre que le K recommande apporte plus de contexte utile que K=1,
+tout en evitant le cout important observe avec K=20.
+
+Exemple 2: How does RAG reduce hallucinations?
+- K=1: latence 0.989s, recall retrieval 0.333, reponse: Insufficient information.
+- K=10: latence 1.330s, recall retrieval 1.000, reponse: RAG reduces hallucinations by anchoring answers to trusted sources, providing up-to-date information, and allowing models to retrieve relevant information from databases, uploaded documents, or web sources, thus reducing the likelihood of generating plausible but incorrect statements.
+- K=20: latence 9.951s, recall retrieval 1.000, reponse: RAG reduces hallucinations by anchoring answers to trusted sources, providing more accurate and factual responses. It does this by combining information retrieval models with generative AI models, allowing the model to retrieve up-to-date or domain-specific information to generate a more accurate answer. This method helps reduce AI hallucinations, which have caused chatbots to describe policies that don't exist, o...
+Cet exemple montre que le K recommande apporte plus de contexte utile que K=1,
+tout en evitant le cout important observe avec K=20.
+
+Valeur Top-K recommandee
+-----------------------
+La valeur la plus pertinente selon le score final est K=10.
+Elle obtient une latence moyenne de 2.879s, une couverture de 67%, une qualite moyenne de 3.40/5 et un score final de 0.587.
+
+Conclusion
+----------
+Pour ce corpus et cette serie de questions, K=10 represente le meilleur compromis entre qualite et performance. Un K faible favorise la rapidite, mais limite
+la quantite de contexte disponible. Un K eleve ameliore la couverture, mais augmente
+nettement la latence. Le Top-K recommande est donc celui qui maximise la qualite utile
+sans penaliser excessivement le temps de reponse.
+
+Limites du projet
+-----------------
+- Le corpus reste limite a un ensemble de documents sur l'IA et le RAG.
+- Les questions sont controlees et synthetiques; des questions d'utilisateurs reels
+  pourraient produire des comportements differents.
+- Les resultats dependent du modele LLM utilise, ici configure via Groq.
+- Les latences peuvent varier selon l'API, le reseau et la charge du service.
+- Les metriques automatiques comme BLEU et ROUGE-L ne remplacent pas totalement
+  une evaluation humaine de la pertinence et de la clarte des reponses.
+- Les tests statistiques indiquent si les ecarts observes sont importants sur
+  cet echantillon, mais ils restent dependants du nombre de questions et du
+  choix du score final.
+
+Fichiers generes
+---------------
+- results/topk_summary.csv
+- results/corpus_summary.csv
+- results/quality_vs_top_k.png
+- results/quality_latency_tradeoff.png
+- results/retrieval_precision_recall_vs_top_k.png
+- results/memory_vs_top_k.png
+- results/rag_results_evaluated.csv
+- results/student_t_tests.csv
+- results/rapport_experimentation_topk.txt

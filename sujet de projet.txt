@@ -1,0 +1,8 @@
+Expérimentation et test de performance d’une solution RAG, spécifiquement, l’analyse du paramètre Top-K :
+
+l’impact de K faible vs K élevé,
+
+le compromis qualité / performance,
+
+la valeur du Top-K la plus pertinente
+
